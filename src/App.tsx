@@ -7,10 +7,11 @@ import "./styles.css";
 export const App = () => {
   console.log("App start");
   const [todoText, setTodoText] = useState("");
-  const [incompleteTodos, setIncompleteTodos] = useState([]);
-  const [completeTodos, setCompleteTodos] = useState([]);
+  const [incompleteTodos, setIncompleteTodos] = useState<string[]>([]);
+  const [completeTodos, setCompleteTodos] = useState<string[]>([]);
 
-  const onChangeTodoText = (event) => setTodoText(event.target.value);
+  const onChangeTodoText = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setTodoText(event.target.value);
   const onClickAdd = () => {
     if (todoText === "") return;
 
@@ -18,12 +19,12 @@ export const App = () => {
     setIncompleteTodos(newTodos);
     setTodoText("");
   };
-  const onClickDelete = (index) => {
+  const onClickDelete = (index: number) => {
     const newTodos = [...incompleteTodos];
     newTodos.splice(index, 1);
     setIncompleteTodos(newTodos);
   };
-  const onClickComplete = (index) => {
+  const onClickComplete = (index: number) => {
     const newIncompleteTodos = [...incompleteTodos];
     const completeTodo = newIncompleteTodos.splice(index, 1);
     setIncompleteTodos(newIncompleteTodos);
@@ -31,7 +32,7 @@ export const App = () => {
     const newCompleteTodos = [...completeTodos, ...completeTodo];
     setCompleteTodos(newCompleteTodos);
   };
-  const onClickBack = (index) => {
+  const onClickBack = (index: number) => {
     const newCompleteTodos = [...completeTodos];
     const backedTodo = newCompleteTodos.splice(index, 1);
     setCompleteTodos(newCompleteTodos);
